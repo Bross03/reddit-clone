@@ -1,0 +1,35 @@
+.post{
+    background-color:rgb(230, 234, 238);
+    margin :1em;
+
+}
+ul{
+    display:flex;
+    justify-content:space-around;
+    list-style-type: none;
+    margin: 1em 0;
+}
+.upVote{
+    width:1em;
+}
+.downVote{
+    width: 1em;
+}
+.votes{
+    display:flex;
+    flex-direction: column;
+    margin:1em;
+}
+.mainPost{
+    display:flex;
+    justify-content: space-between;
+}
+h3{
+    font-size: 2em;
+    margin:0 1em 0 1em;
+}
+img{
+    
+    width:90%;
+    margin:1em;
+}
