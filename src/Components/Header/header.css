@@ -21,10 +21,10 @@ nav{
   .searchTerm {
     width: 100%;
     border: 3px solid red;
-    border-right: none;
+    
     padding: 5px;
     height: 20px;
-    border-radius: 5px 0 0 5px;
+    border-radius: 5px;
     outline: none;
     color: red;
   }
@@ -32,17 +32,5 @@ nav{
   .searchTerm:focus{
     color: red;
   }
-  
-  .searchButton {
 
-    width: 40px;
-    
-    border: 1px solid red;
-    background: red;
-    text-align: center;
-    color: #fff;
-    border-radius: 0 5px 5px 0;
-    cursor: pointer;
-    font-size: 20px;
-  }
   

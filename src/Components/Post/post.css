@@ -19,17 +19,28 @@ ul{
     display:flex;
     flex-direction: column;
     margin:1em;
+    font-weight: 600 ;
 }
 .mainPost{
     display:flex;
     justify-content: space-between;
+    text-decoration: none;
+    color:black;
 }
 h3{
     font-size: 2em;
     margin:0 1em 0 1em;
 }
-img{
+img, video, .selfText{
     
-    width:90%;
+    width:90% !important;
     margin:1em;
+}
+.readMore{
+    font-style: italic;
+    font-weight: 700;
+    color:red;
+}
+.mainPost:hover{
+    font-weight: 900;
 }

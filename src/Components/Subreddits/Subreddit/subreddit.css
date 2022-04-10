@@ -4,3 +4,11 @@
     cursor:pointer;
    
 }
+.subreddit:hover{
+    background-color:red;
+    color:white;
+}
+.subreddit.active{
+    background-color:red;
+    color:white;
+}

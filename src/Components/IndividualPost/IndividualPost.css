@@ -1,0 +1,10 @@
+.comments{
+    display: flex;
+    flex-direction:column;
+    justify-content: space-around;
+}
+.nothingToSee{
+    text-align: center;
+    font-size: 3em;
+    font-weight: 600;
+}

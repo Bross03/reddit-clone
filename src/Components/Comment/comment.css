@@ -1,0 +1,10 @@
+.comment{
+    background-color: rgb(230, 234, 238);
+    margin:1em;
+}
+.author{
+    font-size: 1em;
+}
+.text{
+    margin: 0 1em;
+}

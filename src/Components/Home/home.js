@@ -1,30 +1,41 @@
 import Post from "../Post/post";
 import React from 'react';
 import "./home.css";
-import { fetchPosts, selectPosts } from "../../Reddit/reddit";
+import { fetchPosts, selectPosts, selectSearchTerm } from "../../Reddit/reddit";
 import { useDispatch, useSelector } from "react-redux";
-import store from "../../store/store";
-import {  useEffect } from "react";
+
+import { useEffect } from "react";
 
 function Home(){
-    const posts=useSelector(selectPosts);
-    const dispatch=useDispatch();
     
+    const dispatch=useDispatch();
+    const reddit=useSelector((state)=>state.reddit);
+    const {selectedSubreddit}=reddit;
+    const posts=useSelector(selectPosts);
+    const searchTerm=useSelector(selectSearchTerm);
+    let filteredPosts=[];
+    
+    if(searchTerm){
+        filteredPosts=posts.filter(post=>post.title.toLowerCase().includes(searchTerm.toLowerCase()));
+    }else{
+        filteredPosts=posts;
+    }
+
     useEffect(()=>{
-       dispatch(fetchPosts('AnarchyChess'));
-        // console.log(posts);
-        // setTimeout(()=>{
-        //     console.log(posts);
-        // },10000)
-    });
+       dispatch(fetchPosts(selectedSubreddit));
+      
+    },[selectedSubreddit]);
     
     return(
-        <div className="postWrapper">
+        <div className="homePage">
+            <h2 className="subredditName">{selectedSubreddit}</h2>
+            <div className="postWrapper">
             
-           { posts.map((post)=>{
-                return <Post post={post} key={post.id}/>
+            { filteredPosts.map((post)=>{
+                return <Post post={post} ownPage={false} key={post.id} />
             })
         }
+            </div>
         </div>
     );
 }

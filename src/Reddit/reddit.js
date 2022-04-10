@@ -1,42 +1,43 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { useDispatch } from 'react-redux';
-
 
 
 const getPosts=async (subreddit)=>{
+    try{
+    const response= await fetch('https://www.reddit.com'+subreddit+'.json',{cache:'no-cache'});
+    const jsonResponse= await response.json();
+    return jsonResponse.data.children.map((post)=>post.data);
+    }catch(error){
+        console.log(error);
+    }
     
-    const response= await fetch('https://www.reddit.com/r/'+subreddit+'.json');
-    const json= await response.json();
-    return json.data.children.map((post)=>post.data);
+}
+export const getComments=async(link)=>{
+    try{
+        const response= await fetch('https://www.reddit.com'+link+'.json',{cache:'no-cache'});
+        const jsonResponse= await response.json();
+        return jsonResponse[1].data.children.map((post)=>post.data);
+        }catch(error){
+            console.log(error);
+        }
 }
 export const fetchPosts=(subreddit)=>async (dispatch)=>{
     
     
     dispatch(setIsLoading(true));
-    const posts=await getPosts(subreddit);
+    const posts= await getPosts(subreddit);
     console.log(posts);
-    const postsFormatted= posts.map((post)=>{
-        return ({
-            author:post.author,
-            id:post.id,
-            downVotes:post.downs,
-            upvotes:post.ups,
-            title:post.title,
-            media:post.media,
-            url:post.url
-        });
-    });
-    dispatch(getPostSuccess(postsFormatted));
+    dispatch(getPostSuccess(posts));
     
 };
+
 const redditSlice=createSlice({
     name:'redditSlice',
     initialState:{
         posts: [],
         isLoading:false,
         error:false,
-        subreddit:'/r/funny'
+        selectedSubreddit:'/r/funny',
+        searchTerm:''
     },
     reducers:{
         setPosts(state,action){
@@ -48,8 +49,13 @@ const redditSlice=createSlice({
         setError(state,action){
             state.error=action.payload;
         }, 
+        setSearchTerm(state,action){
+            state.searchTerm=action.payload;
+            
+        },
         setSubreddit(state,action){
-            state.subreddit=action.payload;
+        
+            state.selectedSubreddit=action.payload;
         },
         getPostSuccess(state,action){
             state.posts=action.payload;
@@ -70,6 +76,7 @@ const redditSlice=createSlice({
     }
 
 });
-export const {setPosts, setIsLoading, setError,setSubreddit,getPostSuccess} =redditSlice.actions;
+export const {setPosts, setIsLoading, setError, setSearchTerm, setSubreddit,getPostSuccess} =redditSlice.actions;
 export const selectPosts=(state)=>state.reddit.posts;
+export const selectSearchTerm=(state)=>state.reddit.searchTerm;
 export default redditSlice.reducer;
