@@ -9,20 +9,22 @@ function Post(props){
     
     const {author, downs, id, created_utc, title, ups,url,selftext,is_video}=props.post;
     const ownPage=props.ownPage;
+    let initialVoteChange=0;
+    let voteCount=ups-downs;
     console.log(ownPage);
     let mediaContent;
     if (url.endsWith('png')||url.endsWith('jpg')||url.endsWith('gif')){
-        mediaContent=<img src={url} alt=''/>
+        mediaContent=<img className="mediaPiece" src={url} alt=''/>
     }
     if (is_video){
         let videoUrl=props.post.secure_media.reddit_video.fallback_url;
-        mediaContent=<video width="500px" height="375px" src={videoUrl} controls type="video/webm" autoPlay >video not supported</video>
+        mediaContent=<video classNAme="mediaPiece" width="500px" height="375px" src={videoUrl} controls type="video/webm" autoPlay >video not supported</video>
     }
     const handleClick=(e)=>{
         dispatch(changeActivePost(id));
         
     }
-    const timeAgo=(postDate)=>{
+     const timeAgo=(postDate)=>{
         const currDate= Math.floor(Date.now()/1000);
         const timeAgo=currDate-postDate;
 
@@ -58,38 +60,69 @@ function Post(props){
 
        
     }
+    const voteUp=()=>{
+        if(initialVoteChange>0){
+            return 0;
+        }
+        if(initialVoteChange<0){
+            initialVoteChange++;
+            document.querySelector(".numOfVotes").style.color="black";
+            document.querySelector(".numOfVotes").innerHTML=voteCount+initialVoteChange;
+            return 0;
+        }
+        initialVoteChange++;
+        document.querySelector(".numOfVotes").style.color="red";
+        document.querySelector(".numOfVotes").innerHTML=voteCount+initialVoteChange;
+        return 0;
+    }
+    const voteDown=()=>{
+        if(initialVoteChange<0){
+            return 0;
+        }
+        if(initialVoteChange>0){
+            initialVoteChange--;
+            document.querySelector(".numOfVotes").style.color="black";
+            document.querySelector(".numOfVotes").innerHTML=voteCount+initialVoteChange;
+            return 0;
+        }
+        initialVoteChange--;
+        document.querySelector(".numOfVotes").style.color="red";
+        document.querySelector(".numOfVotes").innerHTML=voteCount+initialVoteChange;
+        return 0;
+    }
     const textFormatted=(text,ownPage)=>{
         if(ownPage||text.length<=600){
-            return (<p>{text}</p>);
+            return (<p className="selfText">{text}</p>);
         }
         if(text.length>600){
             return <div>
-                <p>{text.substring(0, 600)+ "[...]"}</p>
+                <p className="selfText">{text.substring(0, 600)+ "[...]"}</p>
                 <p className="readMore">read more...</p>
             </div>
         }
     }
     return(
         <div className="post" >
-            <Link to="/post" className="mainPost" onClick={handleClick}>
+            <div className="mainPost" >
                 <div className="votes">
-                    <button clasName="upVote"></button>
-                    <span className="numOfVotes">{ups-downs}</span>
-                    <button className="downVote"></button>
+                    <ul className="voteWrap">
+                    <li><a className="upVote" onClick={voteUp}><img src={require("./../../arrow-up-circle.svg")} alt="up vote"/></a></li>
+                    <li><p className="numOfVotes">{voteCount}</p></li>
+                    <li><a className="downVote" onClick={voteDown}><img src={require("./../../arrow-down-circle.svg")} alt="down vote"></img></a></li>
+                    </ul>
                 </div>
-                <div className="postContent">
+                <Link to="/post" className="postContent" onClick={handleClick}>
                     <h3>{title}</h3>
                     {mediaContent}
                     {textFormatted(selftext, ownPage)}
-                    {/* <p>{selftext.substring(0, 600) + (selftext.length > 600 ? " [...]" : "")}</p>
-                            {selftext.length > 600 ? <p className="readMore">read more...</p> : null} */}
-                </div>
-            </Link>
+                </Link>
+            </div>
             <div className="postDetails">
-                <ul>
+                <ul className="postFooter">
                     <li>posted by {author}</li>
                     <li>{timeAgo(created_utc)} </li>
-                    <li><Link to='/post' onClick={handleClick}>comments</Link></li>
+                    <li><Link to='/post' onClick={handleClick}><img className="commentsIcon" src={require('./../../message-square (1).svg')} alt='comments'></img></Link></li>
+                    
                 </ul>
             </div>
         </div>

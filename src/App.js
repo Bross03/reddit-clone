@@ -21,7 +21,7 @@ function App() {
             <Route path="/post" exact>
               <IndividualPost/>
             </Route>
-            <Route path="/">
+            <Route path="/" className="mainPage">
               <Home />     
               <aside>
                 <Subreddits />

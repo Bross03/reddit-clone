@@ -23,7 +23,7 @@ function IndividualPost(){
 
     return(
         <div className='individualPost'>
-            <Link to='/'><button>Back To Home Page</button></Link>
+            <Link to='/'><button className="backToHome">Back To Home Page</button></Link>
             {
                (activePost[0] ? <Post post={activePost[0]} ownPage={true} key={activePost.id}/> : null)
             }

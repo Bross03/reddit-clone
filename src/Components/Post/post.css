@@ -1,25 +1,38 @@
 .post{
     background-color:rgb(230, 234, 238);
     margin :1em;
-
+    
 }
-ul{
+.postFooter{
     display:flex;
+    align-items: center;
     justify-content:space-around;
     list-style-type: none;
-    margin: 1em 0;
+    margin:1em;
+}
+.voteWrap{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .upVote{
-    width:1em;
+    width: 1.5em;
+    cursor: pointer;
 }
 .downVote{
-    width: 1em;
+    width:1.5em;
+    cursor: pointer;
 }
+
 .votes{
     display:flex;
     flex-direction: column;
-    margin:1em;
-    font-weight: 600 ;
+    align-items:center;
+    
+    margin:1em;    
+    font-weight: 600;
+    
 }
 .mainPost{
     display:flex;
@@ -31,10 +44,14 @@ h3{
     font-size: 2em;
     margin:0 1em 0 1em;
 }
-img, video, .selfText{
+.mediaPiece, .selfText, .readMore{
     
     width:90% !important;
-    margin:1em;
+    margin: 1em ;
+}
+.postContent{
+    text-decoration: none;
+    color:black;
 }
 .readMore{
     font-style: italic;
@@ -43,4 +60,8 @@ img, video, .selfText{
 }
 .mainPost:hover{
     font-weight: 900;
+}
+.commentsIcon{
+    padding-top: 0.3em;
+    height:1.3em;
 }
