@@ -5,6 +5,7 @@ import { fetchPosts, selectPosts, selectSearchTerm } from "../../Reddit/reddit";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useEffect } from "react";
+import Subreddits from "../Subreddits/subreddits";
 
 function Home(){
     
@@ -27,6 +28,7 @@ function Home(){
     },[selectedSubreddit]);
     
     return(
+        <div className="main">
         <div className="homePage">
             <h2 className="subredditName">{selectedSubreddit}</h2>
             <div className="postWrapper">
@@ -36,6 +38,11 @@ function Home(){
             })
         }
             </div>
+           
+        </div>
+        <aside>
+            <Subreddits />
+        </aside>
         </div>
     );
 }

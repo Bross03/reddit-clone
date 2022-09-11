@@ -3,9 +3,9 @@ import './App.css';
 import React from 'react';
 import Header from './Components/Header/header';
 import Home from './Components/Home/home';
-import Subreddits from './Components/Subreddits/subreddits';
+
 import { BrowserRouter as Router, Route } from "react-router-dom"
-import { Switch } from 'react-router-dom';
+import { Routes } from 'react-router-dom';
 import IndividualPost from './Components/IndividualPost/IndividualPost';
 
 function App() {
@@ -17,17 +17,10 @@ function App() {
           <Header/>
         </header>
         <main>
-            <Switch>
-            <Route path="/post" exact>
-              <IndividualPost/>
-            </Route>
-            <Route path="/" className="mainPage">
-              <Home />     
-              <aside>
-                <Subreddits />
-              </aside>
-            </Route>
-          </Switch>
+            <Routes>
+            <Route path="/post" exact element={<IndividualPost/>}/>
+            <Route path="/" className="mainPage" element={<Home/>}/>
+            </Routes>
         </main>
       </div>
     </Router>
