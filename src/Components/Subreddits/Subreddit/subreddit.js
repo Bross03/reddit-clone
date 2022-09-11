@@ -1,6 +1,6 @@
 import "./subreddit.css";
 import React from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import { setSubreddit } from "../../../Reddit/reddit";
 
 function Subreddit(props){

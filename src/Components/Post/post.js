@@ -104,9 +104,9 @@ function Post(props){
             <div className="mainPost" >
                 <div className="votes">
                     <ul className="voteWrap">
-                    <li><a className="upVote" onClick={voteUp}><img src={require("./../../arrow-up-circle.svg")} alt="up vote"/></a></li>
+                    <li><div className="upVote" onClick={voteUp}><img src={require("./../../arrow-up-circle.svg")} alt="up vote"/></div></li>
                     <li><p className="numOfVotes">{voteCount}</p></li>
-                    <li><a className="downVote" onClick={voteDown}><img src={require("./../../arrow-down-circle.svg")} alt="down vote"></img></a></li>
+                    <li><div className="downVote" onClick={voteDown}><img src={require("./../../arrow-down-circle.svg")} alt="down vote"></img></div></li>
                     </ul>
                 </div>
                 <Link to="/post" className="postContent" onClick={handleClick}>
