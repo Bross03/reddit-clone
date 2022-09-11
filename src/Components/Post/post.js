@@ -11,18 +11,16 @@ function Post(props){
     const ownPage=props.ownPage;
     let initialVoteChange=0;
     let voteCount=ups-downs;
-    console.log(ownPage);
     let mediaContent;
     if (url.endsWith('png')||url.endsWith('jpg')||url.endsWith('gif')){
         mediaContent=<img className="mediaPiece" src={url} alt=''/>
     }
     if (is_video){
         let videoUrl=props.post.secure_media.reddit_video.fallback_url;
-        mediaContent=<video classNAme="mediaPiece" width="500px" height="375px" src={videoUrl} controls type="video/webm" autoPlay >video not supported</video>
+        mediaContent=<video className="mediaPiece" width="500px" height="375px" src={videoUrl} controls type="video/webm" autoPlay >video not supported</video>
     }
     const handleClick=(e)=>{
         dispatch(changeActivePost(id));
-        
     }
      const timeAgo=(postDate)=>{
         const currDate= Math.floor(Date.now()/1000);

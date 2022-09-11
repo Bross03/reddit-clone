@@ -18,7 +18,6 @@ function IndividualPost(){
     
     useEffect(()=>{
         dispatch(fetchComments(`${subredditActive}/${postId}`));
-        console.log(comments);
     },[postId])
 
     return(

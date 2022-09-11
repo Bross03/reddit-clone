@@ -6,6 +6,9 @@
     min-width:600px;
 }
 .subredditName{
-    color:black;
+    color:white;
     font-size:2em;
+}
+.homePage{
+    min-height:100vh;
 }

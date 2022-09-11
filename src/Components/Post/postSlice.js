@@ -19,7 +19,6 @@ const postSlice=createSlice({
 })
 export const fetchComments=(link)=>async (dispatch)=>{
     const comments=await getComments(link);
-    console.log(comments);
     dispatch(getCommentsSuccess(comments))
 }
 export default postSlice.reducer;

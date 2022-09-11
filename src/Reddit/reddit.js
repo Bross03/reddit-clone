@@ -25,7 +25,6 @@ export const fetchPosts=(subreddit)=>async (dispatch)=>{
     
     dispatch(setIsLoading(true));
     const posts= await getPosts(subreddit);
-    console.log(posts);
     dispatch(getPostSuccess(posts));
     
 };
